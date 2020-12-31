@@ -1,2 +1,0 @@
-class OrderedItem < ApplicationRecord
-end
