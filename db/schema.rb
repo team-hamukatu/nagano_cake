@@ -10,6 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+ActiveRecord::Schema.define(version: 2020_12_31_031304) do
+
+  create_table "members", force: :cascade do |t|
+    t.string "last_name", null: false
+    t.string "first_name", null: false
+    t.string "kana_last_name", null: false
+    t.string "kana_first_name", null: false
+    t.string "postal_code", null: false
+    t.string "street_address", null: false
+    t.string "phone_number", null: false
+    
 ActiveRecord::Schema.define(version: 2020_12_31_031337) do
 
   create_table "genres", force: :cascade do |t|
@@ -19,6 +30,17 @@ ActiveRecord::Schema.define(version: 2020_12_31_031337) do
     t.datetime "updated_at", null: false
   end
 
+  
+  create_table "orders", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.string "shipping_postal_code", null: false
+    t.string "shipping_street_address", null: false
+    t.string "shipping_name", null: false
+    t.integer "postage", null: false
+    t.integer "billing_amount", null: false
+    t.integer "payment_method", default: 0, null: false
+    t.integer "order_status", default: 0, null: false
+    
   create_table "items", force: :cascade do |t|
     t.integer "genre_id", null: false
     t.string "name", null: false
