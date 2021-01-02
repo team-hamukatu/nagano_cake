@@ -10,8 +10,64 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_31_025204) do
+ActiveRecord::Schema.define(version: 2020_12_31_031304) do
 
+  create_table "members", force: :cascade do |t|
+    t.string "last_name", null: false
+    t.string "first_name", null: false
+    t.string "kana_last_name", null: false
+    t.string "kana_first_name", null: false
+    t.string "postal_code", null: false
+    t.string "street_address", null: false
+    t.string "phone_number", null: false
+    t.boolean "is_active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+
+  create_table "genres", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "is_active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  
+  create_table "orders", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.string "shipping_postal_code", null: false
+    t.string "shipping_street_address", null: false
+    t.string "shipping_name", null: false
+    t.integer "postage", null: false
+    t.integer "billing_amount", null: false
+    t.integer "payment_method", default: 0, null: false
+    t.integer "order_status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+    
+  create_table "items", force: :cascade do |t|
+    t.integer "genre_id", null: false
+    t.string "name", null: false
+    t.integer "price_without_tax", null: false
+    t.string "item_image_id", null: false
+    t.text "item_introduction", null: false
+    t.boolean "is_active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ordered_items", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "item_id", null: false
+    t.integer "quantity", null: false
+    t.integer "purchased_price", null: false
+    t.integer "production_status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+  
   create_table "cart_items", force: :cascade do |t|
     t.integer "item_id", null: false
     t.integer "member_id", null: false
