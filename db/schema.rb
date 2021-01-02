@@ -20,8 +20,11 @@ ActiveRecord::Schema.define(version: 2020_12_31_031304) do
     t.string "postal_code", null: false
     t.string "street_address", null: false
     t.string "phone_number", null: false
-    
-ActiveRecord::Schema.define(version: 2020_12_31_031337) do
+    t.boolean "is_active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 
   create_table "genres", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +43,9 @@ ActiveRecord::Schema.define(version: 2020_12_31_031337) do
     t.integer "billing_amount", null: false
     t.integer "payment_method", default: 0, null: false
     t.integer "order_status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
     
   create_table "items", force: :cascade do |t|
     t.integer "genre_id", null: false
@@ -58,6 +64,23 @@ ActiveRecord::Schema.define(version: 2020_12_31_031337) do
     t.integer "quantity", null: false
     t.integer "purchased_price", null: false
     t.integer "production_status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+  
+  create_table "cart_items", force: :cascade do |t|
+    t.integer "item_id", null: false
+    t.integer "member_id", null: false
+    t.integer "quantity", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shipping_addresses", force: :cascade do |t|
+    t.integer "member_id", null: false
+    t.string "shipping_postal_code", null: false
+    t.string "shipping_street_address", null: false
+    t.string "shipping_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
