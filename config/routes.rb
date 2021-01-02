@@ -2,67 +2,59 @@ Rails.application.routes.draw do
 
   devise_for :administrators
   devise_for :members
+
+  namespace :public do
+    root "homes#top"
+    get "/about" => "homes#about"
+  end
+
+  namespace :public do
+    resources :items, only: [:index,:show]
+  end
+
+  namespace :public do
+    resource :members, only: [:show,:edit,:update]
+    patch "/members/withdraw" => "members#withdraw"
+    get "/members/check" => "members#check"
+  end
+
+  namespace :public do
+    resources :cart_items, only: [:create,:index,:update,:destroy]
+    delete "/cart_items/destroy_all" => "cart_items#destroy_all"
+  end
   
   namespace :public do
-    get 'shipping_addresses/index'
-    get 'shipping_addresses/create'
-    get 'shipping_addresses/edit'
-    get 'shipping_addresses/update'
-    get 'shipping_addresses/destroy'
+    resources :orders, only: [:new,:create,:index,:show]
+    post "orders/confirm" => "orders#confirm"
+    get "/orders/complete" => "orders#complete"
   end
+
   namespace :public do
-    get 'orders/new'
-    get 'orders/comfirm'
-    get 'orders/complete'
-    get 'orders/create'
-    get 'orders/index'
-    get 'orders/show'
-  end
-  namespace :public do
-    get 'cart_items/create'
-    get 'cart_items/index'
-    get 'cart_items/update'
-    get 'cart_items/destroy'
-    get 'cart_items/destroy_all'
-  end
-  namespace :public do
-    get 'members/show'
-    get 'members/edit'
-    get 'members/update'
-    get 'members/withdraw'
-    get 'members/check'
-  end
-  namespace :public do
-    get 'items/index'
-    get 'items/show'
-  end
-  namespace :public do
-    get 'homes/top'
-    get 'homes/about'
-  end
- 　
-    namespace :admin do
-    get 'orders/index'
-    get 'orders/show'
-  end
-  namespace :admin do
-    get 'members/index'
-    get 'members/show'
-    get 'members/edit'
-  end
-  namespace :admin do
-    get 'genres/index'
-    get 'genres/edit'
-  end
-  namespace :admin do
-    get 'items/new'
-    get 'items/index'
-    get 'items/show'
-    get 'items/edit'
-  end
-  namespace :admin do
-    get 'homes/top'
+    resources :shipping_addresses, only: [:create,:index,:edit,:update,:destroy]
   end
   
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  namespace :admin do
+    get "/admin" => "homes#about"
+  end
+  
+  namespace :admin do
+    resources :items, only: [:new,:create,:index,:show,:edit,:update]
+  end
+  
+  namespace :admin do
+    resources :genres, only: [:create,:index,:edit,:update]
+  end
+  
+  namespace :admin do
+    resources :members, only: [:index,:show,:edit,:update]
+  end
+  
+  namespace :admin do
+    resources :orders, only: [:index,:show,:update]
+  end
+  
+  namespace :admin do
+    patch "admin/order_details/:id" => "orders_details#update"
+  end
+  
 end
