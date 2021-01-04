@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :members
 
   scope module: :public do
-    root "homes#top"
+　　 root to: "homes#top
     get "/about" => "homes#about"
   end
 
