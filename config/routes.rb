@@ -3,33 +3,33 @@ Rails.application.routes.draw do
   devise_for :administrators
   devise_for :members
 
-  namespace :public do
-    root "homes#top"
+  scope module: :public do
+    root to: "homes#top"
     get "/about" => "homes#about"
   end
 
-  namespace :public do
+  scope module: :public do
     resources :items, only: [:index,:show]
   end
 
-  namespace :public do
+  scope module: :public do
     resource :members, only: [:show,:edit,:update]
     patch "/members/withdraw" => "members#withdraw"
     get "/members/check" => "members#check"
   end
 
-  namespace :public do
+  scope module: :public do
     resources :cart_items, only: [:create,:index,:update,:destroy]
     delete "/cart_items/destroy_all" => "cart_items#destroy_all"
   end
   
-  namespace :public do
+  scope module: :public do
     resources :orders, only: [:new,:create,:index,:show]
     post "orders/confirm" => "orders#confirm"
     get "/orders/complete" => "orders#complete"
   end
-
-  namespace :public do
+ 
+  scope module: :public do
     resources :shipping_addresses, only: [:create,:index,:edit,:update,:destroy]
   end
   

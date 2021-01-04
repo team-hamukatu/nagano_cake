@@ -15,3 +15,17 @@
  */
 @import "bootstrap";
 
+
+
+.cover-img {
+	height: 400px; 
+	display: table;
+	width: 100%;
+	background-size: cover;
+}
+ 
+.cover-text {
+	display: table-cell;
+	vertical-align: middle;
+  text-align: center;
+}
