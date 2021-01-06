@@ -1,2 +1,51 @@
-<h1>Admin::Members#edit</h1>
-<p>Find me in app/views/admin/members/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-10 my-5">
+      <h4><%= @member.last_name + @member.first_name %>さんの会員編集</h4>
+      <table class='table'>
+        <tr>
+          <th>会員ID</th>
+          <th><%= @member.id %></th>
+        </tr>
+        <tr>
+          <th>氏名</th>
+          <th><%= @member.last_name + @member.first_name %></th>
+        </tr>
+        <tr>
+          <th>フリガナ</th>
+          <th><%= @member.kana_last_name + @member.kana_first_name %></th>
+        </tr>
+        <tr>
+          <th>郵便番号</th>
+          <th><%= @member.postal_code %></th>
+        </tr>
+        <tr>
+          <th>住所</th>
+          <th><%= @member.street_address %></th>
+        </tr>
+        <tr>
+          <th>電話番号</th>
+          <th><%= @member.phone_number %></th>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <th><%= @member.email %></th>
+        </tr>
+        <tr>
+          <th>会員ステータス</th>
+          <th><%= @member.is_active %></th>
+        </tr>
+      </table>
+      <div>
+        <%= link_to "編集する", edit_admin_member_path(@member), class: "btn btn-success btn-sm" %>
+      </div>
+      <div>
+        <%= link_to "注文履歴一覧を見る", orders_path(@member), class: "btn btn-primary btn-sm" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

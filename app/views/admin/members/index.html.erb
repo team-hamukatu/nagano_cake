@@ -1,2 +1,28 @@
-<h1>Admin::Members#index</h1>
-<p>Find me in app/views/admin/members/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-10 my-5">
+      <h4>会員一覧</h4>
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th>会員ID</th>
+            <th>氏名</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @members.each do |member| %>
+            <tr>
+              <td><%= member.id %></tb>
+              <td><%= member.last_name + member.first_name %></tb>
+              <td><%= member.email %></tb>
+              <td><%= member.is_active %></tb>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <%= paginate @members %>
+    
