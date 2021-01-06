@@ -60,11 +60,11 @@
 
             <!--member、管理者がログアウトしている時のヘッダー---->
             <% else %>
-              <li class="nav-item">
-                <%= link_to "About", public_about_path, class: 'nav-link text-dark' %>
+              <li class="nav-item"> 
+                <%= link_to "About", about_path, class: 'nav-link text-dark' %>
               </li>
               <li class="nav-item">
-                <%= link_to "商品一覧", public_items_path, class: 'nav-link text-dark' %>
+                <%= link_to "商品一覧", items_path, class: 'nav-link text-dark' %>
               </li>
               <li class="nav-item">
                 <%= link_to "新規登録", new_member_registration_path, class: 'nav-link text-dark' %>
