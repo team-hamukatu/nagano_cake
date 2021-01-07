@@ -1,2 +1,37 @@
-<h1>Admin::Items#show</h1>
-<p>Find me in app/views/admin/items/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <%= attachment_image_tag @item, :item_image, fallback: "no_image.jpg", size:'250x200' %> 
+    </div>
+    <div class="mx-auto">
+      <div class="form-group">
+        <%= label :name, "商品名" %>
+        <%= @item.name %>
+      </div>
+            
+      <div class="form-group">
+        <%= label :item_introduction, '商品説明' %>
+        <%= @item.item_introduction %>
+      </div>
+            
+      <div class="form-group">
+        <%= label :genre_id, "ジャンル" %>
+        <%= @item.genre.name %>
+      </div> 
+            
+      <div class="form-group">
+        <%= label :price_without_tax, "税込み価格（税抜き価格）" %>
+        <%= addTax(@item.price_without_tax,1.08)  %>
+        (<%= @item.price_without_tax %>)円
+      </div>
+            
+      <div class="form-group">
+        <%= @item.is_active %>
+      </div> 
+            
+      <div class="form-group">
+        <%= link_to "編集する", edit_admin_item_path, class: "btn btn-success" %>
+      </div>
+    </div>
+  </div>
+</div>
