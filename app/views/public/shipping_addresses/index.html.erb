@@ -1,27 +1,29 @@
 <div class="container">
+  <h4>配送先登録/一覧</h4>
   <div class="row">
-    <h4>配送先登録/一覧</h4>
     <div class="col-10 my-5">
       <%= form_with model: @shipping_address, local:true do |f| %>
-      <div>
-        <%= f.label :shipping_postal_code, "郵便番号(ハイフンなし)" %>
-        <%= f.text_field :shipping_postal_code, placeholder: "0000000", class: 'form-control' %>
+      <div class="row form-group">
+        <%= f.label :shipping_postal_code, "郵便番号(ハイフンなし)", class: "col-sm-3" %>
+        <%= f.text_field :shipping_postal_code, placeholder: "0000000", class: 'form-control col-sm-3' %>
       </div>
-      <div>
-        <%= f.label :shipping_street_address, "住所" %>
-        <%= f.text_field :shipping_street_address, placeholder: "東京都渋谷区代々木神園町0-0", class: 'form-control' %>
+      <div class="row form-group">
+        <%= f.label :shipping_street_address, "住所", class: "col-sm-3" %>
+        <%= f.text_field :shipping_street_address, placeholder: "東京都渋谷区代々木神園町0-0", class: 'form-control col-sm-8' %>
       </div>
-      <div>
-        <%= f.label :shipping_name, "宛名" %>
-        <%= f.text_field :shipping_name, placeholder: "令和道子", class: 'form-control' %>
+      <div class="row form-group">
+        <%= f.label :shipping_name, "宛名", class: "col-sm-3"%>
+        <%= f.text_field :shipping_name, placeholder: "令和道子", class: 'form-control col-sm-3' %>
       </div>
       <div>
         <%= f.submit "新規登録", class: "btn btn-success btn-sm" %>
       </div>
       <% end %>
     </div>
+  </div>
+  <div class="row">
     <div class="col-7">
-      <table class="table">
+      <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
             <th>郵便番号</th>
@@ -31,20 +33,19 @@
           </tr>
         </thead>
         <tbody>
-          <% @shipping_addresses.each do |shipping_addresse| %>
+          <% @shipping_addresses.each do |shipping_address| %>
             <tr>
               <td><%= shipping_address.shipping_postal_code %></tb>
               <td><%= shipping_address.shipping_street_address %></tb>
               <td><%= shipping_address.shipping_name %></tb>
               <td>
-                <%= link_to "編集する", edit_shipping_address_path(shipping_addresse), class: "btn btn-success btn-sm" %>
-                <%= link_to "削除する", shipping_addresses_path(shipping_addresse), class: "btn btn-success btn-sm" %>
+                <%= link_to "編集する", edit_shipping_address_path(shipping_address), class: "btn btn-success btn-sm" %>
+                <%= link_to "削除する", shipping_address_path(shipping_address), method: :delete, class: "btn btn-danger btn-sm" %>
               </td>
             </tr>
           <% end %>
         </tbody>
       </table>
-
     </div>
   </div>
 </div>
