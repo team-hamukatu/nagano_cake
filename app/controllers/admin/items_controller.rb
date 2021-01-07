@@ -16,15 +16,20 @@ class Admin::ItemsController < ApplicationController
   end
   
   def create
-    item = Item.new(blog_params)
-    item.save
-    redirect_to admin_item_path(item.id)
+    @item = Item.new(item_params)
+    @item.save
+    redirect_to admin_item_path(@item)
   end
   
   def update
-    item = Item.find(params[:id])
-    item.update(item_params)
-    redirect_to admin_item_path(item.id)
+    @item = Item.find(params[:id])
+    @item.update(item_params)
+    redirect_to admin_item_path(@item.id)
+  end
+   
+  private 
+  def item_params 
+    params.require(:item).permit(:genre_id, :name, :price_without_tax, :item_image, :item_introduction, :is_active)
   end
   
 end
