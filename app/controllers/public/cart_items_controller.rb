@@ -3,6 +3,8 @@ class Public::CartItemsController < ApplicationController
   end
 
   def index
+    @cart_items = CartItem.all
+    @cart_item = CartItem.find(params[:id])
   end
 
   def update
