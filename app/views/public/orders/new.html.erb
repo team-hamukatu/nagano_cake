@@ -1,10 +1,62 @@
-<h1>注文情報入力</h1>
+<div class="container">
+  <h4>注文情報入力</h4>
+  <div class="row">
+    <!--支払い方法の選択-->
+    <div class="col-10 my-5">
+      <%= form_with model: @order, local:true do |f| %>
+      <h5>支払い方法</h5>
+      <div>
+        <%= f.radio_button :payment_method, :credit_card %>
 
-<div>
-<%= form_with model: @order, local:true do |f| %>
-  <%= f.radio_button :payment_method, :credit_card %>
-  <%= f.label :payment_method, "クレジットカード", {value: :credit_card, style: "display: inline-block;"} %>
-  <%= f.radio_button :payment_method, :bank_transfer %>
-  <%= f.label :payment_method, "銀行振込", {value: :bank_transfer, style: "display: inline-block;"} %>
-<% end %>
+        <%= f.label :payment_method, "クレジットカード", {value: :credit_card, style: "display: inline-block;"} %>
+      </div>
+      <div>
+        <%= f.radio_button :payment_method, :bank_transfer %>
+        <%= f.label :payment_method, "銀行振込", {value: :bank_transfer, style: "display: inline-block;"} %>
+      </div>
+    </div>
+    
+    <!--お届け先の選択-->
+    <div class="col-10 my-5">
+      <h5>お届け先</h5>
+      <div class="container">
+        <!--お届け先①　ご自身の住所-->
+        <div class="my-3">
+          <%= f.radio_button :shipping, 1 %>
+          <%= f.label :shipping, "ご自身の住所" %>
+          <div>
+           <%= @order.member.postal_code %>
+           <%= @order.member.street_address %> <br>
+           <%= @order.member.first_name + @order.member.last_name %>
+          </div>
+        </div>
+        <!--お届け先②　登録済み住所から選択-->
+        <div class="my-3">
+        <%= f.radio_button :shipping, 2 %>
+        <%= f.label :shipping, "登録済み住所から選択" %> <br>
+        <%= f.collection_select :shipping, @shipping_addresses,:id, :shipping_data %>
+        </div>
+          <!--お届け先③　新しいお届け先-->
+        　<div class="my-3">
+          <%= f.radio_button :shipping, 3 %>
+          <%= f.label :shipping, "新しいお届け先" %>
+            <div class="row form-group">
+              <%= f.label :shipping_postal_code, "郵便番号(ハイフンなし)", class: "col-sm-4" %>
+              <%= f.text_field :shipping_postal_code, placeholder: "0000000", class: 'form-control col-sm-3' %>
+            </div>
+            <div class="row form-group">
+              <%= f.label :shipping_street_address, "住所", class: "col-sm-4" %>
+              <%= f.text_field :shipping_street_address, placeholder: "東京都渋谷区代々木神園町0-0", class: 'form-control col-sm-8' %>
+            </div>
+            <div class="row form-group">
+              <%= f.label :shipping_name, "宛名", class: "col-sm-4"%>
+              <%= f.text_field :shipping_name, placeholder: "令和道子", class: 'form-control col-sm-4' %>
+            </div>
+          </div>
+          <!--------------------->
+      </div>
+      <%= f.submit "注文を確定する" %>
+      <% end %>
+    </div>
+  </div>
 </div>
