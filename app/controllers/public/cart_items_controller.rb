@@ -4,14 +4,14 @@ class Public::CartItemsController < ApplicationController
     @cart_item = current_member.cart_items.build(cart_item_params)
     @cart_items = current_member.cart_items.all
     @cart_items.each do |cart_item|
-    if cart_item.item_id == @cart_item.item_id
-      new_quantity = cart_item.quantity + @cart_item.quantity
-      cart_item.update_attribute(:quantity, new_quantity)
-      @cart_item.delete
-    end
-  end
-  　@cart_item.save
-  　redirect_to :cart_items
+      if cart_item.item_id == @cart_item.item_id
+        new_quantity = cart_item.quantity + @cart_item.quantity
+        cart_item.update_attribute(:quantity, new_quantity)
+        @cart_item.delete
+      end
+      end
+      @cart_item.save
+      redirect_to :cart_items
   end
   
   def index
