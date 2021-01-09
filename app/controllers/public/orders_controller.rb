@@ -6,43 +6,50 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
+    @cart_items = CartItem.all
+    @cart_items
+    shipping_data_selection = params["order"][:shipping]
 
-  end
-
-  def complete
-  end
-
-  def create
-    shipping_data_selection =  Order.find_by(params[:shipping])
-    
-    if shipping_data_selection == 1
+    if shipping_data_selection == "1" then
       @order = Order.new
       @order.member_id = current_member.id
       @order.shipping_postal_code = current_member.postal_code
       @order.shipping_street_address = @order.member.street_address
-      @order.shipping_name = @order.member.(last_name + first_name)
+      @order.shipping_name = @order.member.first_name + @order.member.last_name
       @order.postage = "800"
       @order.billing_amount = "1000"
-      @order.save
 
-    elsif  shipping_data_selection == 2
+    elsif shipping_data_selection == "2" then
       @order = Order.new
-      shipping_address = ShippingAddress.find(params[:shipping_address_id])
-      binding.pry
+      shipping_address = ShippingAddress.find(params["order"][:shipping_address_id])
       @order.member_id = current_member.id
-      @order.shipping_postal_code = shipping_address.postal_code
+      @order.shipping_postal_code = shipping_address.shipping_postal_code
       @order.shipping_street_address = shipping_address.shipping_street_address
       @order.shipping_name = shipping_address.shipping_name
       @order.postage = "800"
       @order.billing_amount = "2000"
-      @order.save
 
-    else shipping_data_selection == 3
-      @order = Order.new(orders_params)
+    else shipping_data_selection == "3"
+      @order = Order.new(order_params)
       @order.member_id = current_member.id
       @order.postage = "800"
       @order.billing_amount = "3000"
-      @order.save
+    end
+  end
+
+  def complete
+
+  end
+
+  def create
+    order = Order.new(order_params)
+    order.member_id = current_member.id
+    order.postage = "800"
+    order.billing_amount = "1000"
+    if order.save!
+      redirect_to orders_complete_path
+    else
+      redirect_to orders_confirm_path
     end
   end
 
@@ -54,7 +61,7 @@ class Public::OrdersController < ApplicationController
 
   private
 
-  def orders_params
-    params.require(:order).permit(:shipping_postal_code, :shipping_street_address, :shipping_name, :payment_method)
+  def order_params
+    params.require(:order).permit(:member_id, :shipping_postal_code, :shipping_street_address, :shipping_name, :payment_method, :order_status)
   end
 end
