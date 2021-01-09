@@ -13,9 +13,10 @@ Rails.application.routes.draw do
   end
 
   scope module: :public do
-    resource :members, only: [:show,:edit,:update]
+    resource :members, only: [:edit,:update]
     patch "/members/withdraw" => "members#withdraw"
     get "/members/check" => "members#check"
+    get "/members/my_page" => "members#show"
   end
 
   scope module: :public do
