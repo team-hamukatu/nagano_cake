@@ -1,50 +1,43 @@
 class Public::CartItemsController < ApplicationController
   
   def create
-   
-  　cart_item = CartItem.new(cart_item_params)
-   
-  　cart_item.member_id = current_member.id
-
-  　cart_item.save
+    @cart_item = current_member.cart_items.build(cart_item_params)
+    @cart_items = current_member.cart_items.all
+    @cart_items.each do |cart_item|
+    if cart_item.item_id == @cart_item.item_id
+      new_quantity = cart_item.quantity + @cart_item.quantity
+      cart_item.update_attribute(:quantity, new_quantity)
+      @cart_item.delete
+    end
+  end
+  　@cart_item.save
+  　redirect_to :cart_items
   end
   
   def index
-    @cart_items = CartItem.all
+    @cart_items = CartItem.where(member_id: current_member.id)
   end
   
-  def add_item
-    if @cart_item.blank?
-      @cart_item = current_cart.cart_items.build(product_id: params[:product_id])
-    end
-
-    @cart_item.quantity += params[:quantity].to_i
-    @cart_item.save
-    redirect_to current_cart
-  end
-
   def update
-     item = Item.find(params[:item_id])
-  cart_item = CartItem.new(cart_item_params)
-  cart_item.item_id = item.id
-  cart_item.member_id = 1
-  cart_item.quantity = item.quantity
-  cart_item.save
+    cart_item = CartItem.find(params[:id])
+    cart_item.update(cart_item_params)
+    redirect_to cart_items_path
   end
 
   def destroy
-     @cart_item.destroy
-     redirect_to current_cart
+    cart_item = CartItem.find(params[:id])
+    cart_item.destroy
+    redirect_to cart_items_path
   end
 
   def destroy_all
+    CartItem.destroy_all
+    redirect_to cart_items_path
   end
   
   private
-
-  def cart_item_params
-   
-    params.require(:cart_item).permit(:item_id, :member_id, :quantity)
   
+  def cart_item_params
+    params.require(:cart_item).permit(:item_id, :member_id, :quantity)
   end
 end
