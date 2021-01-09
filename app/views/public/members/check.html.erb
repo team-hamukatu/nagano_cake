@@ -1,2 +1,15 @@
-<h1>Public::Members#check</h1>
-<p>Find me in app/views/public/members/check.html.erb</p>
+<center class="mt-3"><h4>本当に退会しますか？</h4></center>
+
+<center class="mt-5">退会すると、会員登録情報や<br>
+     これまでの購入履歴が閲覧できなくなります。<br>
+     退会する場合は、『退会する』をクリックしてください。
+</center>
+
+<center class="mt-5">
+    <div style="display: inline-block" class="mr-4">
+      <%= link_to "退会しない", shipping_addresses_path, class:"btn btn-primary" %>
+    </div>
+    <div style="display: inline-block">
+      <%= link_to "退会する", root_path, class:"btn btn-danger" %>
+    </div>
+</center>
