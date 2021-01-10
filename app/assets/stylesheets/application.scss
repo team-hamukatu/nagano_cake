@@ -18,14 +18,20 @@
 
 
 .cover-img {
-	height: 400px; 
+	height: 400px;
 	display: table;
 	width: 100%;
 	background-size: cover;
 }
- 
+
 .cover-text {
 	display: table-cell;
 	vertical-align: middle;
   text-align: center;
+}
+
+td>span,th>span {
+  -ms-writing-mode : lr-tb;
+  writing-mode : horizontal-tb;
+  white-space : nowrap;
 }
