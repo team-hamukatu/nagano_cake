@@ -56,7 +56,7 @@ class Public::OrdersController < ApplicationController
     amount_without_postage = 0
     cart_items = @order.member.cart_items
     cart_items.each do |cart_item|
-    total_price = view_context.number_to_currency(cart_item.item.price_without_tax*1.08, unit:"¥", strip_insignificant_zeros: true)
+    total_price = cart_item.item.price_without_tax*1.08
 
     #商品合計
     amount_without_postage +=  (cart_item.total_price).to_i
@@ -69,15 +69,19 @@ class Public::OrdersController < ApplicationController
     @order.save
 
     # orderd_itemテーブルへデータを保存する
+
+    @order.member.cart_items.each do |cart_item|
     ordered_item = OrderedItem.new
-    ordered_item.item_id = ordered_item.order.member.cart_items.item.id
-    ordered_item.quantity = ordered_item.order.member.cart_items.quantity
-    ordered_item.purchased_price = @billing_amount
+    ordered_item.order_id = @order.id
+    ordered_item.item_id = cart_item.item.id
+    ordered_item.quantity = cart_item.quantity
+    ordered_item.purchased_price = cart_item.item.price_without_tax*1.08
     ordered_item.save
+    end
+
+    @order.member.cart_items.destroy_all
 
     redirect_to orders_complete_path
-
-
   end
 
   def index
