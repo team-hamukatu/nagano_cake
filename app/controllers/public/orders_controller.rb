@@ -69,14 +69,24 @@ class Public::OrdersController < ApplicationController
 
     order.postage
     order.billing_amount = billing_amount
-    if order.save
-      redirect_to orders_complete_path
-    else
-      redirect_to orders_confirm_path
-    end
+
+    order.save
+
+    #工事中
+    #orderd_itemテーブルへデータを保存する
+    # ordered_item = OrderdItem.new
+    # ordered_item.item_id = cart_items.item.id
+    # ordered_item.quantity = cart_items.quantity
+    # ordered_item.purchased_price =
+    # ordered_item.save
+
+    redirect_to orders_complete_path
+
+
   end
 
   def index
+    @orders = Order.where(:member_id, :current_member.id)
   end
 
   def show
