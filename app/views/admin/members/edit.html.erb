@@ -2,12 +2,12 @@
   <div class="row">
     <div class="col-10 my-5">
       <h4><%= @member.first_name + @member.last_name %>さんの会員情報編集</h4>
+      <%= form_with model: @member, url: admin_member_path(@member), local:true do |f| %>
       <table class='table table-borderless'>
         <tr>
           <th>会員ID</th>
           <th><%= @member.id %></th>
         </tr>
-        <%= form_with model: @member, url: admin_member_path(@member), local:true do |f| %>
         <tr>
           <th>氏名</th>
           <th><%= f.text_field :first_name %></th>
