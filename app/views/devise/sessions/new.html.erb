@@ -8,7 +8,7 @@
   <div class="row ml-3 mt-3">
     <h3 class="col-5 text-center" style= "background-color: #EEEEEE">会員の方はこちらからログイン</h3>
   </div>
-  
+
   <div class="row mt-4">
     <div class="col-8 mx-auto">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -24,17 +24,19 @@
         <%= f.password_field :password, class:"form-control", autocomplete: "Password" %>
         </div>
       </div>
-      <div class="actions">
-        <%= f.submit "ログイン", class:"btn btn-primary mb-4" %>
+      <div class="form-group row">
+        <div class="offset-sm-2">
+          <%= f.submit "ログイン", class:"btn btn-primary mb-4" %>
+        </div>
       </div>
       <% end %>
     </div>
   </div>
-  
+
   <div class="row ml-3 mt-3 mb-3">
     <h3 class="col-5 text-center" style= "background-color: #EEEEEE">会員登録がお済みでない方</h3>
   </div>
-  
+
   <div class="row">
     <div class="col-6 mx-auto">
       <p><%= link_to "こちら", new_member_registration_path %>から新規登録を行ってください。</p>
