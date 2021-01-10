@@ -1,2 +1,27 @@
-<h1>Public::Members#show</h1>
-<p>Find me in app/views/public/members/show.html.erb</p>
+<div class="container">
+  <div class="row mb-5 ml-3">
+    <div class="col-3">
+      <h2 class="text-center" style= "background-color: #EEEEEE">マイページ</h2>
+    </div>
+  </div>
+  <div class="row">
+     <%= form_with model: @members, local:true do |member_id| %>
+     <div class="col-sm-3">登録情報</div>
+     <%= link_to "編集する", edit_members_path(member_id), class: "btn btn-success btn-sm" %>
+     <% end %>
+  </div>
+    <div class="row">
+      <div class="col-7">
+        <table class="table-bordered">
+          <thead class="thead-light">
+            <tr>
+              <th>氏名</th>
+              <th></th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  
+ 
+  </div>
