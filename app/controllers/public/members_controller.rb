@@ -8,13 +8,15 @@ class Public::MembersController < ApplicationController
 
   def update
     @member = Member.find(current_member.id)
-    @member = Member.update(member_params)
-    redirect_to members_my_page_path
+    if @member.update(member_params)
+      redirect_to members_my_page_path
+    else
+      render :edit
+    end
   end
 
   def withdraw
     @member = Member.find(current_member.id)
-
     @member.update(is_active: "Invalid")
     reset_session
     redirect_to root_path
