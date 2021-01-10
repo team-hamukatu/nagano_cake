@@ -1,1 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="col-3 ml-4">
+      <h2 class="text-center" style= "background-color: #EEEEEE">会員情報編集</h2>
+    </div>
+  </div>
+    <div class="pt-5 pb-3">
+      <%= form_with model: @member, url: members_path, local: true do |f| %>
+      <div class="form-group row">
+        <div class="col-3">氏名</div>
+        <%= f.label :（姓）, class:"col-sm-1 col-form-label text-right pr-0" %>
+        <%= f.text_field :first_name, class:"form-control col-sm-3", autofocus: true, autocomplete: "(姓)" %>
+        <%= f.label :（名）, class:"col-sm-1 col-form-label text-right pr-0" %>
+        <%= f.text_field :last_name, class:"form-control col-sm-3", autofocus: true, autocomplete: "(名)" %>
+      </div>
 
+      <div class="form-group row">
+        <div class="col-3">フリガナ</div>
+        <%= f.label :（セイ）, class:"col-sm-1 col-form-label text-right pr-0" %>
+        <%= f.text_field :kana_first_name, class:"form-control col-sm-3", autofocus: true, autocomplete: "(セイ)" %>
+        <%= f.label :（メイ）, class:"col-sm-1 col-form-label text-right pr-0" %>
+        <%= f.text_field :kana_last_name, class:"form-control col-sm-3", autofocus: true, autocomplete: "(メイ)" %>
+      </div>
+      <div class="form-group row">
+        <%= f.label :メールアドレス, class:"col-sm-4 col-form-label" %>
+        <%= f.email_field :email, class:"form-control col-sm-3", autofocus: true, autocomplete: "メールアドレス" %>
+      </div>
+      <div class="form-group row">
+        <%= f.label :郵便番号, class:"col-sm-4 col-form-label" %>
+        <%= f.text_field :postal_code, class:"form-control col-sm-3", autofocus: true, autocomplete: "郵便番号" %>
+      </div>
+      <div class="form-group row">
+        <%= f.label :住所, class:"col-sm-4 col-form-label" %>
+        <%= f.text_field :street_address, class:"form-control col-sm-8", autofocus: true, autocomplete: "住所" %>
+      </div>
+      <div class="form-group row">
+        <%= f.label :電話番号, class:"col-sm-4 col-form-label" %>
+        <%= f.text_field :phone_number, class:"form-control col-sm-3", autofocus: true, autocomplete: "電話番号" %>
+      </div>
+      <div class="row">
+        <div class="offset-md-4">
+          <div style="display: inline-block" class="mr-4">
+            <%= link_to "編集内容を保存", members_my_page_path, class:"btn btn-primary" %>
+          </div>
+          <div style="display: inline-block">
+            <%= link_to "退会する", members_check_path, class:"btn btn-danger" %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
