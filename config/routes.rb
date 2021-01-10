@@ -19,14 +19,17 @@ Rails.application.routes.draw do
   end
 
   scope module: :public do
-    resources :cart_items, only: [:create,:index,:update,:destroy]
-    delete "/cart_items/destroy_all" => "cart_items#destroy_all"
+    resources :cart_items, only: [:create,:index,:update,:destroy]do
+      collection do
+        delete 'destroy_all'
+      end
+    end
   end
 
   scope module: :public do
-    resources :orders, only: [:new,:create,:index,:show]
-    post "orders/confirm" => "orders#confirm"
+    post "/orders/confirm" => "orders#confirm"
     get "/orders/complete" => "orders#complete"
+    resources :orders, only: [:new,:create,:index,:show]
   end
 
   scope module: :public do
