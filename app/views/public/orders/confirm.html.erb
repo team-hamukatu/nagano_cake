@@ -21,13 +21,13 @@
                 <%= cart_item.item.name %>
               </td>
               <td>
-                <%= (cart_item.billing_amount).to_i %>
-              </td>
-              <td>
-                <%= (cart_item.total_price).to_i %>
+                <%= number_to_currency(cart_item.item.price_without_tax*1.08, unit:"¥", strip_insignificant_zeros: true)  %>
               </td>
               <td>
                 <%= cart_item.quantity %>
+              </td>
+              <td>
+                <%= number_to_currency(cart_item.total_price.to_i, unit:"¥", strip_insignificant_zeros: true) %>
               </td>
             </tr>
             <% end %>
@@ -47,12 +47,12 @@
         </thead>
         <tbody>
             <tr>
-              <td><span><%= @order.postage %></span></tb>
+              <td><span><%= number_to_currency(@order.postage, unit:"¥", strip_insignificant_zeros: true) %></span></tb>
               <td>
-                <span><%= @amount_without_postage %></span>
+                <span><%= number_to_currency(@amount_without_postage, unit:"¥", strip_insignificant_zeros: true) %></span>
               </td>
               <td>
-                <span><%= @billing_amount %></span>
+                <span><%= number_to_currency(@billing_amount, unit:"¥", strip_insignificant_zeros: true) %></span>
               </td>
             </tr>
         </tbody>
