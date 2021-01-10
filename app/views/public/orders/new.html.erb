@@ -2,7 +2,7 @@
   <h4>注文情報入力</h4>
   <div class="row">
     <!--支払い方法の選択-->
-    <div class="col-10 my-5">
+    <div class="col-10 my-3">
       <%= form_with model: @order, url: orders_confirm_path, local:true do |f| %>
       <h5>支払い方法</h5>
       <div>
@@ -16,27 +16,33 @@
     </div>
 
     <!--お届け先の選択-->
-    <div class="col-10 my-5">
+    <div class="col-10 my-3">
       <h5>お届け先</h5>
       <div class="container">
         <!--お届け先①　ご自身の住所-->
-        <div class="my-3">
-          <%= f.radio_button :shipping, 1 %>
-          <%= f.label :shipping, "ご自身の住所" %>
-          <div>
-           <%= @order.member.postal_code %>
+        <div class="row my-3">
+          <div class="col-10">
+            <%= f.radio_button :shipping, 1 %>
+            <%= f.label :shipping, "ご自身の住所" %>
+          </div>
+          <div class="col-10">
+           <%= "〒" + @order.member.postal_code.to_s.insert(3, "-") %>
            <%= @order.member.street_address %> <br>
            <%= @order.member.first_name + @order.member.last_name %>
           </div>
         </div>
         <!--お届け先②　登録済み住所から選択-->
-        <div class="my-3">
-        <%= f.radio_button :shipping, 2 %>
-        <%= f.label "登録済み住所から選択" %> <br>
-        <%= f.collection_select :shipping_address_id, @shipping_addresses,:id, :shipping_data %>
+        <div class="row my-3">
+          <div class="col-10">
+            <%= f.radio_button :shipping, 2 %>
+            <%= f.label "登録済み住所から選択" %>
+          </div>
+          <div class="col-10">
+            <%= f.collection_select :shipping_address_id, @shipping_addresses,:id, :shipping_data, class: "form-control" %>
+          </div>
         </div>
           <!--お届け先③　新しいお届け先-->
-        　<div class="my-3">
+        　<div>
           <%= f.radio_button :shipping, 3 %>
           <%= f.label "新しいお届け先" %>
             <div class="row form-group">
@@ -54,8 +60,12 @@
           </div>
           <!--------------------->
       </div>
-      <%= f.submit "注文を確定する" %>
+      <div class="mx-auto my-5" style="width: 100px;">
+      <%= f.submit "確認画面へ進む", class: "btn btn-primary"%>
+      </div>
       <% end %>
     </div>
   </div>
 </div>
+
+

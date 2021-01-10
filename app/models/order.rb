@@ -6,4 +6,5 @@ class Order < ApplicationRecord
   def format_postal_code(str)
     self.shipping_postal_code.to_s.insert(3, "-")
   end
+  
 end

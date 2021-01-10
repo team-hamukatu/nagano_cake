@@ -3,7 +3,7 @@
 
   <!--注文情報確認画面-->
   <div class="row">
-    <div class="col-10 my-5">
+    <div class="col-8 my-5">
       <table class="table table-bordered">
         <thead class="thead-light">
           <tr>
@@ -14,39 +14,46 @@
           </tr>
         </thead>
         <tbody>
-          <%= @order  
+            <% @cart_items.each do |cart_item| %>
             <tr>
               <td>
-                <%#= attachment_image_tag @order.member.cart_items.item, :item_image, :fill, 50, 40, fallback:"no_image.jpg" %>
-                <%#= @order.member.cart_items.item.name %>
+                <%= attachment_image_tag cart_item.item, :item_image, :fill, 50, 40, fallback:"no_image.jpg" %>
+                <%= cart_item.item.name %>
               </td>
               <td>
-                <%#= number_to_currency(@order.member.cart_items.item.price_without_tax*1.08, unit:"¥", strip_insignificant_zeros: true) %>
+                <%= (cart_item.billing_amount).to_i %>
               </td>
               <td>
-                <%#= @order.member.cart_items.quantity %>
+                <%= (cart_item.total_price).to_i %>
               </td>
-              <td></td>
+              <td>
+                <%= cart_item.quantity %>
+              </td>
             </tr>
+            <% end %>
         </tbody>
       </table>
     </div>
 
     <!--送料・商品合計・請求金額-->
-    <div class="col-10 my-5">
-      <table class="table table-bordered">
+    <div class="col-4 my-5">
+      <table class="table table-bordered" style="-ms-writing-mode : tb-lr; writing-mode : vertical-lr;">
         <thead class="thead-light">
           <tr>
-            <th>送料</th>
-            <th>商品合計</th>
-            <th>請求金額</th>
+            <th><span>送料</span></th>
+            <th><span>商品合計</span></th>
+            <th><span>請求金額</span></th>
           </tr>
         </thead>
         <tbody>
             <tr>
-              <td></tb>
-              <td></td>
-              <td></td>
+              <td><span><%= @order.postage %></span></tb>
+              <td>
+                <span><%= @amount_without_postage %></span>
+              </td>
+              <td>
+                <span><%= @billing_amount %></span>
+              </td>
             </tr>
         </tbody>
       </table>
@@ -56,15 +63,15 @@
     <!--支払い方法-->
 
   <div class="row">
-    <h5 class="col-sm-3">支払い方法</h5>
+    <h5 class="col-sm-2">支払い方法</h5>
     <div class="col-sm-6"><%= @order.payment_method %></div>
   </div>
 
     <!--お届け先-->
   <div class="row">
-    <h5 class="col-sm-3">お届け先</h5>
+    <h5 class="col-sm-2">お届け先</h5>
     <div class="col-sm-6">
-      <%= @order.shipping_postal_code %>
+      <%= "〒" + @order.shipping_postal_code.to_s.insert(3, "-") %>
       <%= @order.shipping_street_address %><br>
       <%= @order.shipping_name %>
     </div>
@@ -77,7 +84,9 @@
       <%= f.hidden_field :shipping_postal_code, :value => @order.shipping_postal_code %>
       <%= f.hidden_field :shipping_street_address,:value => @order.shipping_street_address %>
       <%= f.hidden_field :shipping_name, :value => @order.shipping_name %>
-      <%= f.submit "送信" %>
+      <div class="mx-auto my-5" style="width: 100px;">
+        <%= f.submit "注文を確定する", class: "btn btn-success" %>
+      </div>
     <% end %>
   </div>
 

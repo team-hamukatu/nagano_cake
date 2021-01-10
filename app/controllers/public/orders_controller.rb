@@ -7,7 +7,6 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @cart_items = CartItem.all
-    @cart_items
     shipping_data_selection = params["order"][:shipping]
 
     if shipping_data_selection == "1" then
@@ -16,8 +15,6 @@ class Public::OrdersController < ApplicationController
       @order.shipping_postal_code = current_member.postal_code
       @order.shipping_street_address = @order.member.street_address
       @order.shipping_name = @order.member.first_name + @order.member.last_name
-      @order.postage = "800"
-      @order.billing_amount = "1000"
 
     elsif shipping_data_selection == "2" then
       @order = Order.new
@@ -26,15 +23,30 @@ class Public::OrdersController < ApplicationController
       @order.shipping_postal_code = shipping_address.shipping_postal_code
       @order.shipping_street_address = shipping_address.shipping_street_address
       @order.shipping_name = shipping_address.shipping_name
-      @order.postage = "800"
-      @order.billing_amount = "2000"
 
     else shipping_data_selection == "3"
       @order = Order.new(order_params)
       @order.member_id = current_member.id
-      @order.postage = "800"
-      @order.billing_amount = "3000"
     end
+
+    #金額計算
+    #小計
+    @amount_without_postage = 0
+    @cart_items = @order.member.cart_items
+    @cart_items.each do |cart_item|
+    @total_price = number_to_currency(cart_item.item.price_without_tax*1.08, unit:"¥", strip_insignificant_zeros: true)
+
+    #商品合計
+    @amount_without_postage +=  (cart_item.total_price).to_i
+    end
+
+    #請求金額
+    @billing_amount = @amount_without_postage + @order.postage
+
+    #最後にordersテーブルへ送料と請求金額データを代入
+    @order.postage
+    @order.billing_amount = @billing_amount
+
   end
 
   def complete
@@ -43,9 +55,21 @@ class Public::OrdersController < ApplicationController
   def create
     order = Order.new(order_params)
     order.member_id = current_member.id
-    order.postage = "800"
-    order.billing_amount = "1000"
-    if order.save!
+    #金額計算
+    #小計
+    amount_without_postage = 0
+    cart_items = order.member.cart_items
+    cart_items.each do |cart_item|
+    total_price = number_to_currency(cart_item.item.price_without_tax*1.08, unit:"¥", strip_insignificant_zeros: true)
+
+    #商品合計
+    amount_without_postage +=  (cart_item.total_price).to_i
+    end
+    billing_amount = amount_without_postage + order.postage
+
+    order.postage
+    order.billing_amount = billing_amount
+    if order.save
       redirect_to orders_complete_path
     else
       redirect_to orders_confirm_path
