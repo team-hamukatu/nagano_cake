@@ -63,13 +63,13 @@
     <!--支払い方法-->
 
   <div class="row">
-    <h5 class="col-sm-2">支払い方法</h5>
+    <h5 class="col-sm-3">支払い方法</h5>
     <div class="col-sm-6"><%= @order.payment_method %></div>
   </div>
 
     <!--お届け先-->
   <div class="row">
-    <h5 class="col-sm-2">お届け先</h5>
+    <h5 class="col-sm-3">お届け先</h5>
     <div class="col-sm-6">
       <%= "〒" + @order.shipping_postal_code.to_s.insert(3, "-") %>
       <%= @order.shipping_street_address %><br>
