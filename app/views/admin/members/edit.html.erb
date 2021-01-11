@@ -1,2 +1,56 @@
-<h1>Admin::Members#edit</h1>
-<p>Find me in app/views/admin/members/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-10 my-5">
+      <h4><%= @member.first_name + @member.last_name %>さんの会員情報編集</h4>
+      <%= form_with model: @member, url: admin_member_path(@member), local:true do |f| %>
+      <table class='table table-borderless'>
+        <tr>
+          <th>会員ID</th>
+          <th><%= @member.id %></th>
+        </tr>
+        <tr>
+          <th>氏名</th>
+          <th><%= f.text_field :first_name %></th>
+          <th><%= f.text_field :last_name %></th>
+        </tr>
+        <tr>
+          <th>フリガナ</th>
+          <th><%= f.text_field :kana_first_name %></th>
+          <th><%= f.text_field :kana_last_name %></th>
+        </tr>
+        <tr>
+          <th>郵便番号</th>
+          <th><%= f.text_field :postal_code %></th>
+        </tr>
+        <tr>
+          <th>住所</th>
+          <th><%= f.text_field :street_address %></th>
+        </tr>
+        <tr>
+          <th>電話番号</th>
+          <th><%= f.text_field :phone_number %></th>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <th><%= f.text_field :email %></th>
+        </tr>
+        <tr>
+          <th>会員ステータス</th>
+          <th>
+            <%= f.radio_button :is_active, :Available %> 有効
+            <%= f.radio_button :is_active, :Invalid %> 退会
+          </th>
+        </tr>
+      </table>
+      <div>
+        <%= f.submit "変更を保存", class: "btn btn-success btn-sm" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
+

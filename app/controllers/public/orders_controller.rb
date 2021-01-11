@@ -7,6 +7,7 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @cart_items = CartItem.all
+
     shipping_data_selection = params["order"][:shipping]
 
     if shipping_data_selection == "1" then
@@ -16,6 +17,7 @@ class Public::OrdersController < ApplicationController
       @order.shipping_street_address = @order.member.street_address
       @order.shipping_name = @order.member.first_name + @order.member.last_name
 
+
     elsif shipping_data_selection == "2" then
       @order = Order.new
       shipping_address = ShippingAddress.find(params["order"][:shipping_address_id])
@@ -23,6 +25,7 @@ class Public::OrdersController < ApplicationController
       @order.shipping_postal_code = shipping_address.shipping_postal_code
       @order.shipping_street_address = shipping_address.shipping_street_address
       @order.shipping_name = shipping_address.shipping_name
+
 
     else shipping_data_selection == "3"
       @order = Order.new(order_params)
