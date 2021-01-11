@@ -4,24 +4,52 @@
       <h2 class="text-center" style= "background-color: #EEEEEE">マイページ</h2>
     </div>
   </div>
-  <div class="row">
-     <%= form_with model: @members, local:true do |member_id| %>
-     <div class="col-sm-3">登録情報</div>
-     <%= link_to "編集する", edit_members_path(member_id), class: "btn btn-success btn-sm" %>
-     <% end %>
-  </div>
-    <div class="row">
-      <div class="col-7">
-        <table class="table-bordered">
-          <thead class="thead-light">
-            <tr>
-              <th>氏名</th>
-              <th></th>
-            </tr>
-          </thead>
-        </table>
-      </div>
+
+
+  <div class="mb-4">
+    <div style="display: inline-block" class="mr-4"><h3>登録情報</h3></div>
+    <div style="display: inline-block">
+    <%= link_to "編集する", members_edit_path, class:"btn btn-success" %>
     </div>
-  
- 
   </div>
+  <table class="table table-bordered" style="width:60%">
+    <tbody>
+      <tr>
+        <th style="background-color: #EEEEEE">氏名</th>
+        <td><%= current_member.last_name %> <%= current_member.first_name %></td>
+      </tr>
+      <tr>
+        <th style="background-color: #EEEEEE">カナ</th>
+        <td><%= current_member.kana_last_name %> <%= current_member.kana_first_name %></td>
+      </tr>
+      <tr>
+        <th style="background-color: #EEEEEE">郵便番号</th>
+        <td><%= current_member.postal_code %></td>
+      </tr>
+      <tr>
+        <th style="background-color: #EEEEEE">住所</th>
+        <td><%= current_member.street_address %></td>
+      </tr>
+      <tr>
+        <th style="background-color: #EEEEEE">電話番号</th>
+        <td><%= current_member.phone_number %></td>
+      </tr>
+      <tr>
+        <th style="background-color: #EEEEEE">メールアドレス</th>
+        <td><%= current_member.email %></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="mb-4">
+    <div style="display: inline-block" class="mr-5"><h3>配送先</h3></div>
+    <div style="display: inline-block">
+    <%= link_to "一覧を見る", shipping_addresses_path, class:"btn btn-primary" %>
+    </div>
+  </div>
+  <div class="mb-4">
+    <div style="display: inline-block" class="mr-4"><h3>注文履歴</h3></div>
+    <div style="display: inline-block">
+    <%= link_to "一覧を見る", orders_path, class:"btn btn-primary" %>
+    </div>
+  </div>
+</div>
