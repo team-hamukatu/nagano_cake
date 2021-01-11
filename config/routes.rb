@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
 
+  scope module: :public do
+    resource :members, only: [:update]
+    # ユーザーの会員状況を更新
+    patch "/members/withdraw" => "members#withdraw"
+    # ユーザーの会員状況を取得
+    get "/members/check" => "members#check"
+    get "/members/my_page" => "members#show"
+    get "/members/edit" => "members#edit"
+  end
+
   devise_for :administrators
   devise_for :members
 
@@ -12,11 +22,7 @@ Rails.application.routes.draw do
     resources :items, only: [:index,:show]
   end
 
-  scope module: :public do
-    resource :members, only: [:show,:edit,:update]
-    patch "/members/withdraw" => "members#withdraw"
-    get "/members/check" => "members#check"
-  end
+
 
   scope module: :public do
     resources :cart_items, only: [:create,:index,:update,:destroy]do
@@ -27,9 +33,9 @@ Rails.application.routes.draw do
   end
 
   scope module: :public do
-    resources :orders, only: [:new,:create,:index,:show]
-    post "orders/confirm" => "orders#confirm"
+    post "/orders/confirm" => "orders#confirm"
     get "/orders/complete" => "orders#complete"
+    resources :orders, only: [:new,:create,:index,:show]
   end
 
   scope module: :public do
