@@ -14,7 +14,6 @@
         <%= f.label :（名）, class:"col-sm-1 col-form-label text-right pr-0" %>
         <%= f.text_field :last_name, class:"form-control col-sm-3",placeholder:"道子", autofocus: true, autocomplete: "(名)" %>
       </div>
-
       <div class="form-group row">
         <div class="col-3">フリガナ</div>
         <%= f.label :（セイ）, class:"col-sm-1 col-form-label text-right pr-0" %>
@@ -33,6 +32,7 @@
       <div class="form-group row">
         <%= f.label :住所, class:"col-sm-4 col-form-label" %>
         <%= f.text_field :street_address, placeholder: "東京都渋谷区代々木０−０", class:"form-control col-sm-8", autofocus: true, autocomplete: "住所" %>
+
       </div>
       <div class="form-group row">
         <%= f.label :電話番号（ハイフンなし）, class:"col-sm-4 col-form-label" %>
