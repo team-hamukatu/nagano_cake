@@ -1,2 +1,74 @@
-<h1>Admin::Orders#show</h1>
-<p>Find me in app/views/admin/orders/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h4 class ="bg-light px-3 mt-3 mb-2 mx-6">注文履歴詳細</h3>
+  </div>
+  <div class="row col-6">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>購入者</th><td><%= @order.shipping_name %></td>
+        </tr>
+        <tr>
+          <th>注文日</th><td><%= @order.created_at %></td>
+        </tr>
+        <tr>
+          <th>配送先</th><td><%= @order.shipping_street_address %></td>
+        </tr>
+        <tr>
+          <th></th><td><%= @order.shipping_name %></td>
+        </tr>
+        <tr>
+          <th>支払い方法</th><td><%= @order.payment_method %></td>
+        </tr>
+        <tr>
+          <th>注文ステータス</th><td>
+             <%= form_with model:@order, url: admin_order_path, method: :patch local:true do |f| %>
+             <%= f.select :order_status, Order.order_status.keys %>
+             <%= f.submit "更新" , class: "btn btn-success" %>
+             <% end %>
+          </td>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="row">
+    <table class="table col-8">
+      <thead class="thead-light">
+        <tr>
+          <th>商品名</th>
+          <th>単価（税込み）</th>
+          <th>数量</th>
+          <th>小計</th>
+          <th>制作ステータス</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+         <% @ordered_items.each do |ordered_items| %>
+        <tr>
+          <td><%= link_to ordered_items.item_id.name, admin_member_path(member_id) %></td>
+          <td><%= addTax(ordered_items.item_id.price_without_tax),1.08 %></td>
+          <td><%= ordered_items.quantity %></td>
+          <td><%= (ordered_items.total_price).to_i %></td>
+           <%= form_with model:@ordered_item, url: admin_path, method: :patch local:true do |f| %>
+          <td><%= f.select :production_status, OrderItem.production_status.keys %></td>
+          <td><%= f.submit "更新" , class: "btn btn-success" %></td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table offset-1 col-3 align-bottom">
+      <thead>
+        <tr>
+          <th>商品合計</th><td></td>
+        </tr>
+        <tr>
+          <th>送料</th><td></td>
+        </tr>
+        <tr>
+          <th>請求額合計</th><td></td>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
