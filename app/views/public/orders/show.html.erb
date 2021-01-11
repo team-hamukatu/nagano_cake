@@ -82,13 +82,13 @@
                 <%= ordered_item.item.name %>
               </td>
               <td>
-                <%= number_to_currency(ordered_item.item.price_without_tax, unit:"", strip_insignificant_zeros: true) %>
+                <%= number_to_currency(ordered_item.item.price_without_tax*1.08, unit:"", strip_insignificant_zeros: true) %>
               </td>
               <td>
                 <%= ordered_item.quantity %>
               </td>
               <td>
-                <%= number_to_currency(ordered_item.item.price_without_tax*ordered_item.quantity, unit:"", strip_insignificant_zeros: true) %>
+                <%= number_to_currency(ordered_item.item.price_without_tax*1.08*ordered_item.quantity, unit:"", strip_insignificant_zeros: true) %>
               </td>
             </tr>
           <% end %>
