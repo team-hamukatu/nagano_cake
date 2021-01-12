@@ -3,7 +3,7 @@ class Admin::OrderDetailsController < ApplicationController
   def update
     ordered_item = OrderedItem.find(params[:id])
     ordered_item.update(ordered_item_params)
-    redirect_to admin_order_path(order.id)
+    redirect_to  admin_order_path(ordered_item.order_id)
   end
   
   private

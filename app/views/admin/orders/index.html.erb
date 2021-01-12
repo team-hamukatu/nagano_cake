@@ -8,7 +8,6 @@
       <table class="table">
         <thead>
           <tr>
-            <% @orders.each do |order| %>
             <th>購入日時</th>
             <th>購入者</th>
             <th>注文個数</th>
@@ -16,14 +15,25 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><%= link_to order.created_at, admin_order_path(order.member_id) %></td>
+           
+           <% @orders.each do |order| %>
+          <tr> 
+            <td><%= link_to order.created_at.strftime('%Y/%m/%d %H:%M'), admin_order_path(order.id) %></td>
             <td><%= order.shipping_name %></td>
-            <td><%= order_item.quantity %></td>
-            <td><%= order.status %></td>
+            <% @sum = 0 %>
+            <% order.ordered_items.each do |ordered_item| %>
+            <% @sum +=  (ordered_item.quantity).to_i %>
+            <% end %>
+            <td><%= @sum %></td>
+            <td><%= order.order_status %></td>
           </tr>
+          <% end %>
         </tbody>
       </table>
     </div>
   </div>
 </div>
+
+<div class="mx-auto" style="width: 300px;">
+    <%= paginate @orders %>
+  </div>
