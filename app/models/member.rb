@@ -18,7 +18,6 @@ class Member < ApplicationRecord
   validates :phone_number, presence: true
   
 
-  has_many :cart_items, dependent: :destroy
   enum is_active: {Available: true, Invalid: false}
     #有効会員はtrue、退会済み会員はfalse
 
@@ -26,4 +25,5 @@ class Member < ApplicationRecord
         super && (self.is_active === "Available")
     end
     #is_activeが有効の場合は有効会員(ログイン可能)
+
 end
