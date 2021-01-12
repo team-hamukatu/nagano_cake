@@ -6,7 +6,7 @@
     <table class="table table-borderless">
       <thead>
         <tr>
-          <th>購入者</th><td><%= link_to @order.shipping_name, admin_member_path(@order) %></td>
+          <th>購入者</th><td><%= link_to @order.member.first_name + @order.member.last_name, admin_member_path(@order) %></td>
         </tr>
         <tr>
           <th>注文日</th><td><%= @order.created_at.strftime('%Y/%m/%d %H:%M') %></td>
@@ -32,7 +32,7 @@
     </table>
   </div>
   <div class="row">
-   
+
     <table class="table col-8">
       <thead class="thead-light">
         <tr>
@@ -60,7 +60,7 @@
              <%= number_to_currency(ordered_item.item.price_without_tax*1.08*ordered_item.quantity, unit:"", strip_insignificant_zeros: true) %>
           </td>
           <td>
-            <%= form_with model: ordered_item, url: admin_path(ordered_item), method: :patch, local:true do |f| %>
+            <%= form_with model: ordered_item, url: admin_order_path(ordered_item), method: :patch, local:true do |f| %>
             <%= f.select :production_status, OrderedItem.production_statuses.keys.map {|k| [k, k]}, {} %>
             <%= f.submit "更新" , class: "btn btn-success ml-5" %>
             <% end %>
@@ -69,7 +69,7 @@
         <% end %>
       </tbody>
     </table>
-    
+
     <table class="table table-borderless offset-1 col-3 align-self-end">
       <thead>
         <tr>
