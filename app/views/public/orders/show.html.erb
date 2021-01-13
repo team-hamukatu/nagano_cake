@@ -51,12 +51,12 @@
         <tbody>
             <tr>
               <td>
-                <span><%= number_to_currency((@order.billing_amount - @order.postage), unit:"", strip_insignificant_zeros: true) %>
+                <span><%= number_to_currency((@order.billing_amount - @order.postage), unit:"", strip_insignificant_zeros: true, precision:0) %>
               <td>
                 <span><%= @order.postage %></span>
               </td>
               <td>
-                <span><%= number_to_currency(@order.billing_amount, unit:"", strip_insignificant_zeros: true) %></span>
+                <span><%= number_to_currency(@order.billing_amount, unit:"", strip_insignificant_zeros: true, precision:0) %></span>
               </td>
             </tr>
         </tbody>
@@ -84,13 +84,13 @@
                 <%= ordered_item.item.name %>
               </td>
               <td>
-                <%= number_to_currency(ordered_item.item.price_without_tax*1.08, unit:"", strip_insignificant_zeros: true) %>
+                <%= number_to_currency(ordered_item.item.price_without_tax*1.08, unit:"", strip_insignificant_zeros: true, precision:0) %>
               </td>
               <td>
                 <%= ordered_item.quantity %>
               </td>
               <td>
-                <%= number_to_currency(ordered_item.item.price_without_tax*1.08*ordered_item.quantity, unit:"", strip_insignificant_zeros: true) %>
+                <%= number_to_currency(ordered_item.item.price_without_tax*1.08*ordered_item.quantity, unit:"", strip_insignificant_zeros: true, precision:0) %>
               </td>
             </tr>
           <% end %>
