@@ -1,10 +1,13 @@
 <div class="container">
   <div class="text">
+  <div class="row mt-5">
+    <div class="col-5">
+      <h2 class="text-center" style= "background-color: #EEEEEE"><%= @member.first_name + @member.last_name %>さんの会員情報編集</h2>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-10 my-5">
-      <h4><%= @member.first_name + @member.last_name %>さんの会員情報編集</h4>
-      
       <%= form_with model: @member, url: admin_member_path(@member), local:true do |f| %>
       <table class='table table-borderless'>
         <tr>

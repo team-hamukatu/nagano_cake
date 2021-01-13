@@ -1,9 +1,14 @@
 <div class="container">
   <div class="text">
+  <div class="row mt-5">
+    <div class="col-5">
+      <h2 class="text-center" style= "background-color: #EEEEEE"><%= @member.first_name + @member.last_name %>さんの会員詳細</h2>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-10 my-5">
-      <h4><%= @member.first_name + @member.last_name %>さんの会員詳細</h4>
+
       <table class='table table-borderless'>
         <tr>
           <th>会員ID</th>

@@ -43,7 +43,7 @@
             <%= f.radio_button :shipping, 2 %>
             <%= f.label "登録済み住所から選択" %>
           </div>
-          <div class="col-10 ml-5 form-group">
+          <div class="col-11 ml-5 form-group">
             <%= f.collection_select :shipping_address_id, @shipping_addresses,:id, :shipping_data,  {}, :class => "form-control" %>
           </div>
         </div>
@@ -56,11 +56,11 @@
               <%= f.text_field :shipping_postal_code, placeholder: "0000000", class: 'form-control col-sm-3' %>
             </div>
             <div class="row form-group ml-5">
-              <%= f.label :shipping_street_address, "住所", class: "col-sm-4" %>
-              <%= f.text_field :shipping_street_address, placeholder: "東京都渋谷区代々木神園町0-0", class: 'form-control col-sm-8' %>
+              <%= f.label :shipping_street_address, "住所", class: "col-sm-5" %>
+              <%= f.text_field :shipping_street_address, placeholder: "東京都渋谷区代々木神園町0-0", class: 'form-control col-sm-7' %>
             </div>
             <div class="row form-group ml-5">
-              <%= f.label :shipping_name, "宛名", class: "col-sm-4"%>
+              <%= f.label :shipping_name, "宛名", class: "col-sm-5 "%>
               <%= f.text_field :shipping_name, placeholder: "令和道子", class: 'form-control col-sm-4' %>
             </div>
           </div>
