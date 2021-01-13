@@ -1,6 +1,7 @@
 <div class="container">
-  <div class="row">
-    <div class="col-3 ml-4">
+  <div class="text">
+  <div class="row mt-5">
+    <div class="col-3">
       <h2 class="text-center" style= "background-color: #EEEEEE">会員情報編集</h2>
     </div>
   </div>
@@ -31,13 +32,13 @@
       </div>
       <div class="form-group row">
         <%= f.label :住所, class:"col-sm-4 col-form-label" %>
-        <%= f.text_field :street_address, class:"form-control col-sm-8", autofocus: true, autocomplete: "住所" %>
+        <%= f.text_field :street_address, class:"form-control col-sm-7", autofocus: true, autocomplete: "住所" %>
       </div>
       <div class="form-group row">
         <%= f.label :電話番号, class:"col-sm-4 col-form-label" %>
         <%= f.text_field :phone_number, class:"form-control col-sm-3", autofocus: true, autocomplete: "電話番号" %>
       </div>
-      <div class="row">
+      <div class="row mt-6">
         <div class="offset-md-4">
           <div style="display: inline-block" class="mr-4">
             <%= f.submit "編集内容を保存", class:"btn btn-primary" %>
@@ -49,3 +50,5 @@
       </div>
       <% end %>
     </div>
+    </div>
+</div>

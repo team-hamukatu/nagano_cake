@@ -1,22 +1,26 @@
 <div class = "container">
+  <div class="text">
   <br>
-  <div class = "row"> 
+  <div class = "row">
+    <div class="img-top"></div>
     <div class="offset-md-2"></div>
-      <div class="col-md-8 cover-img" style="background-image:url(assets/cake.jpeg);">
-        <div class="cover-text text-center">
-				  <p style="color: #fff; background-color: rgba(0, 0, 0, 0.5);">
-				    ようこそ、ながのCAKEへ！<br> 
+      <div class="col-md-8">
+        <div class="text-box">
+				  <p class="text-top">
+				    ようこそ、ながのCAKEへ！</p>
+				  <p>
             このサイトは、ケーキ販売のECサイトになります<br>
             会員でない方も商品の閲覧はできますが、<br>
             購入には会員登録が必要になります。
 				  </p>
-			</div> 
+			</div>
     </div>
   </div>
-</div>
+
+
+ 
   
- <div class="container">
-  <div class="row">
+  <div class="row mt-3">
     <div class="col">
       <h2 class="d-inline my-2">新着商品</h2>
       <div class="d-flex align-content-start flex-wrap">
@@ -33,6 +37,16 @@
         <% end %>
       </div>
     </div>
+
+    <div class="row">
+      <div class="offset-md-8"></div>
+      <div class="offset-md-2"></div>
+      <div class="col-10">
+        <%= link_to "全ての商品を見る>", items_path %>
+      </div>
+    </div>
   </div>
+  </div>
+
 </div>
 
