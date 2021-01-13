@@ -4,8 +4,19 @@ class Member < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_many :shipping_addresses, dependent: :destroy
   has_many :cart_items, dependent: :destroy
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+         
+  validates :email, presence: true
+  validates :last_name, presence: true
+  validates :first_name, presence: true
+  validates :kana_last_name, presence: true
+  validates :kana_first_name, presence: true
+  validates :postal_code, presence: true
+  validates :street_address, presence: true
+  validates :phone_number, presence: true
+  
 
   enum is_active: {Available: true, Invalid: false}
     #有効会員はtrue、退会済み会員はfalse

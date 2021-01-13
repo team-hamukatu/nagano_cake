@@ -4,13 +4,13 @@
       <div><%= attachment_image_tag @item, :item_image, :fill, 350, 250, fallback:"no_image.jpg" %></div>
     </div>
     <div class="col-6">
-      <h3><%= @item.name %></h3>
+      <h3><%= @item.name %></h3> 
       <p><%= @item.item_introduction %></p>
-      <p><%= number_to_currency(@item.price_without_tax*1.08, unit:"¥", strip_insignificant_zeros: true) %>(税込み)</p>
+      <p><%= number_to_currency(@item.price_without_tax*1.08, unit:"¥", strip_insignificant_zeros: true, precision:0) %>(税込み)</p>
       <div>
         <%= form_with model:@cart_item, url: cart_items_path, local:true do |f| %>
         <%= f.hidden_field :item_id, value:@item.id %>
-          <%= f.select :quantity, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9], ['10', 10]], prompt: "個数選択"%>
+          <%= f.select :quantity, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8], ['9', 9], ['10', 10]], {include_blank: "個数選択"}, required: true %>
           <%= f.submit "カートにいれる" %>
         <% end %>
       </div>
