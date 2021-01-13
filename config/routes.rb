@@ -43,7 +43,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get "/admin" => "homes#about"
+    get "/" => "homes#top"
   end
 
   namespace :admin do
