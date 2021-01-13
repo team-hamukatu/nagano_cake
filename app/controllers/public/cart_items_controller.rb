@@ -11,6 +11,7 @@ class Public::CartItemsController < ApplicationController
       @cart_item.save
     end
       redirect_to :cart_items
+      
   end
 
   def index
