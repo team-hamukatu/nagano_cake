@@ -23,13 +23,18 @@
 
       <div class="form-group">
         <%= label :price_without_tax, "税込み価格（税抜き価格）" %>
-        <%= addTax(@item.price_without_tax,1.08)  %>
-        (<%= @item.price_without_tax %>)円
+        <%= number_to_currency(addTax(@item.price_without_tax,1.08), unit:"", strip_insignificant_zeros: true)  %>
+        (<%= number_to_currency(@item.price_without_tax, unit:"", strip_insignificant_zeros: true) %>)円
       </div>
 
       <div class="form-group">
-        <%= @item.is_active %>
+        <% if @item.is_active == "販売中" %>
+          <span class="text-success">販売中</span>
+        <% else %>
+          <span class="text-black-50">販売停止中</span>
+        <% end %>
       </div>
+
 
       <div class="form-group">
         <%= link_to "編集する", edit_admin_item_path, class: "btn btn-success" %>

@@ -1,4 +1,6 @@
 class Public::ShippingAddressesController < ApplicationController
+  before_action :authenticate_member!
+  
   def index
     @shipping_addresses = ShippingAddress.where(member_id: current_member.id)
     @shipping_address = ShippingAddress.new

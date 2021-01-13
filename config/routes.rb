@@ -43,7 +43,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get "/admin" => "homes#about"
+    get "/" => "homes#top"
   end
 
   namespace :admin do
@@ -63,7 +63,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    patch "admin/order_details/:id" => "orders_details#update"
+    patch "/order_details/:id" => "order_details#update"
   end
 
 end

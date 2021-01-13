@@ -1,10 +1,12 @@
 <div class="container">
   <diiv class="text">
 
-  <div class="row">
-    <div class="mx-auto">
-      <h2>商品新規登録</h2>
-        <br>
+        <div class="row mt-5">
+          <h2 class = "text-center" style= "background-color: #EEEEEE">商品新規登録</h2>
+        </div>
+
+        <div class="row">
+        <div class="mx-auto">
         <%= form_with model:@item, url: admin_items_path, local:true do |f| %>
         <div class="form-group">
           <label for="item_image">商品画像</label>
@@ -40,6 +42,7 @@
           <%= f.submit "新規登録", class: "btn btn-success" %>
         </div>
         <% end %>
+    </div>
     </div>
   </div>
 
