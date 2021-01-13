@@ -61,7 +61,7 @@
              <%= number_to_currency(ordered_item.item.price_without_tax*1.08*ordered_item.quantity, unit:"", strip_insignificant_zeros: true, precision:0) %>
           </td>
           <td>
-            <%= form_with model: ordered_item, url: admin_path(ordered_item), method: :patch, local:true do |f| %>
+            <%= form_with model: ordered_item, url: admin_order_details_path(ordered_item), method: :patch, local:true do |f| %>
             <%= f.select :production_status, OrderedItem.production_statuses.keys.map {|k| [k, k]}, {} %>
             <%= f.submit "更新" , class: "btn btn-success ml-5" %>
             <% end %>
