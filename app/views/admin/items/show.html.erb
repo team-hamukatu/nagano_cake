@@ -1,5 +1,7 @@
 <div class="container">
-  <div class="row">
+  <div class="text">
+
+  <div class="row mt-5">
     <div class="col-3">
       <%= attachment_image_tag @item, :item_image, fallback: "no_image.jpg", size:'250x200' %>
     </div>
@@ -38,5 +40,7 @@
         <%= link_to "編集する", edit_admin_item_path, class: "btn btn-success" %>
       </div>
     </div>
+  </div>
+
   </div>
 </div>
