@@ -1,5 +1,9 @@
 <div class="container">
+  <div class="text">
+
   <h4>配送先登録/一覧</h4>
+
+  <!--配送先新規登録フォーム-->
   <div class="row">
     <div class="col-10 my-5">
       <%= form_with model: @shipping_address, local:true do |f| %>
@@ -21,6 +25,8 @@
       <% end %>
     </div>
   </div>
+
+  <!--既存配送先の表示、編集削除ボタン-->
   <div class="row">
     <div class="col-7">
       <table class="table table-bordered">
@@ -47,5 +53,7 @@
         </tbody>
       </table>
     </div>
+  </div>
+
   </div>
 </div>

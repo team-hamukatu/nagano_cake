@@ -1,43 +1,47 @@
 <div class="container">
+  <diiv class="text">
+
   <div class="row">
-    <div class="mx-auto"> 
+    <div class="mx-auto">
       <h2>商品新規登録</h2>
         <br>
         <%= form_with model:@item, url: admin_items_path, local:true do |f| %>
-        <div class="form-group"> 
+        <div class="form-group">
           <label for="item_image">商品画像</label>
           <%= f.attachment_field :item_image %>
         </div>
-            
+
         <div class="form-group">
           <%= f.label :name, "商品名" %>
           <%= f.text_field :name, class: 'form-control'%>
         </div>
-            
+
         <div class="form-group">
           <%= f.label :item_introduction, '商品説明' %>
           <%= f.text_field :item_introduction, class: 'form-control' %>
         </div>
-            
+
         <div class="form-group">
           <%= f.label :genre_id, "ジャンル" %>
-          <%= f.collection_select :genre_id, Genre.all, :id, :name %> 
+          <%= f.collection_select :genre_id, Genre.all, :id, :name %>
         </div>
-            
+
         <div class="form-group">
           <%= f.label :price_without_tax, "税抜き価格" %>
           <%= f.text_field :price_without_tax, class: 'form-control'%>
         </div>
-            
+
         <div class="form-group">
           <label><%= f.radio_button :is_active, "販売中" %>販売中</label>
           <label><%= f.radio_button :is_active, "販売停止中" %>販売停止中</label>
         </div>
-            
+
         <div class="form-group">
           <%= f.submit "新規登録", class: "btn btn-success" %>
         </div>
         <% end %>
     </div>
+  </div>
+
   </div>
 </div>
