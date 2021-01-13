@@ -1,4 +1,6 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_member!
+
   def new
     @order = Order.new
     @order.member_id = current_member.id
@@ -7,23 +9,23 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @cart_items = CartItem.where(member_id: current_member.id)
-    shipping_data_selection = params["order"][:shipping]
+    @shipping_data_selection = params["order"][:shipping]
 
       @order = Order.new(order_params)
       @order.member_id = current_member.id
 
-    if shipping_data_selection == "1" then
+    if @shipping_data_selection == "1" then
       @order.shipping_postal_code = current_member.postal_code
       @order.shipping_street_address = @order.member.street_address
       @order.shipping_name = @order.member.first_name + @order.member.last_name
 
-    elsif shipping_data_selection == "2" then
+    elsif @shipping_data_selection == "2" then
       shipping_address = ShippingAddress.find(params["order"][:shipping_address_id])
       @order.shipping_postal_code = shipping_address.shipping_postal_code
       @order.shipping_street_address = shipping_address.shipping_street_address
       @order.shipping_name = shipping_address.shipping_name
 
-    else shipping_data_selection == "3"
+    else @shipping_data_selection == "3"
     end
 
     #金額計算
@@ -51,25 +53,33 @@ class Public::OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.member_id = current_member.id
-    #金額計算
+    #---------------------金額計算-----------------------
     #小計
     amount_without_postage = 0
     cart_items = @order.member.cart_items
     cart_items.each do |cart_item|
+    #小計
     total_price = cart_item.item.price_without_tax*1.08
-
     #商品合計
     amount_without_postage +=  (cart_item.total_price).to_i
     end
+    #請求額
     billing_amount = amount_without_postage + @order.postage
-
+    
+    #送料、請求額データを格納し保存-----------------------
     @order.postage
     @order.billing_amount = billing_amount
-
     @order.save
 
-    # orderd_itemテーブルへデータを保存する
+    # もし、新規配送先を選択していれば配送先テーブルにレコードを追加---------------
+    shipping_data_selection = params["order"][:shipping]
+    if shipping_data_selection == "3"
+      shipping_address = ShippingAddress.new(shipping_address_params)
+      shipping_address.member_id = current_member.id
+      shipping_address.save
+    end
 
+    # orderd_itemテーブルへデータを保存する---------------------------------------
     @order.member.cart_items.each do |cart_item|
     ordered_item = OrderedItem.new
     ordered_item.order_id = @order.id
@@ -78,9 +88,9 @@ class Public::OrdersController < ApplicationController
     ordered_item.purchased_price = cart_item.item.price_without_tax*1.08
     ordered_item.save
     end
-
+    
+    # カート商品を削除する---------------------------------------
     @order.member.cart_items.destroy_all
-
     redirect_to orders_complete_path
   end
 
@@ -96,5 +106,8 @@ class Public::OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:member_id, :shipping_postal_code, :shipping_street_address, :shipping_name, :payment_method, :order_status)
+  end
+  def shipping_address_params
+    params.require(:order).permit(:member_id, :shipping_postal_code, :shipping_street_address, :shipping_name)
   end
 end

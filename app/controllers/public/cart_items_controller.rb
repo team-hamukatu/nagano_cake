@@ -1,5 +1,6 @@
 class Public::CartItemsController < ApplicationController
-  
+  before_action :authenticate_member!
+
   def create
     @cart_item = current_member.cart_items.build(cart_item_params)
     @cart_items = current_member.cart_items.all
@@ -14,11 +15,11 @@ class Public::CartItemsController < ApplicationController
       redirect_to :cart_items
       
   end
-  
+
   def index
     @cart_items = CartItem.where(member_id: current_member.id)
   end
-  
+
   def update
     cart_item = CartItem.find(params[:id])
     cart_item.update(cart_item_params)
@@ -35,9 +36,9 @@ class Public::CartItemsController < ApplicationController
     CartItem.destroy_all
     redirect_to cart_items_path
   end
-  
+
   private
-  
+
   def cart_item_params
     params.require(:cart_item).permit(:item_id, :member_id, :quantity)
   end
