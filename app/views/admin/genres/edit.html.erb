@@ -1,11 +1,13 @@
 <div class="container">
   <div class="text">
-  <div class="row">
-    <h4 class="text">ジャンル編集</h4>
+  <div class="row mt-5">
+    <div class="col-3">
+      <h2 class="text-center" style= "background-color: #EEEEEE">ジャンル編集</h2>
+    </div>
     <div class="col-10 my-5">
       <%= form_with model:@genre, url: admin_genre_path(@genre), local:true do |f| %>
-        <%= f.label :name, "ジャンル名" %>
-        <%= f.text_field :name, placeholder: "ジャンル名" %>
+        <%= f.label :name, "ジャンル名", class: "mr-5"%>
+        <%= f.text_field :name, placeholder: "ジャンル名", class: "mr-5" %>
         <%= f.submit "変更を保存", class: "btn btn-success btn-sm" %>
       <% end %>
     </div>

@@ -2,7 +2,12 @@
   <div class="text">
   <div class="row">
     <div class="col-md-8 mx-auto">
-      <div class= "row"><h2>ショッピングカート</h2></div>
+      <div class="row mt-5">
+        <div class="col-6">
+          <h2 class="text-center" style= "background-color: #EEEEEE">ショッピングカート</h2>
+        </div>
+      </div>
+
       <div class= "row offset-10 col-2">
         <%= link_to "全て削除", destroy_all_cart_items_path, method: :delete, class: 'btn btn-danger btn-sm' %>
       </div>
@@ -43,7 +48,7 @@
           </tr>
           <% @sum +=  (cart_item.total_price).to_i %>
           <% end %>
-        </tbody> 
+        </tbody>
       </table>
       <div class="offset-1">
          <%= link_to "買い物を続ける", root_path, class: "col-2" "btn btn-primary btn-sm" %>

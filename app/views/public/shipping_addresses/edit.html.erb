@@ -1,7 +1,12 @@
 <div class="container">
   <div class="text">
 
-  <h4>配送先編集</h4>
+  <div class="row mt-5">
+  <div class="col-3">
+    <h2 class="text-center" style= "background-color: #EEEEEE">配送先編集</h2>
+  </div>
+  </div>
+
   <div class="row">
     <div class="col-10 my-5">
       <%= form_with model: @shipping_address, local:true do |f| %>
@@ -18,7 +23,7 @@
         <%= f.text_field :shipping_name, placeholder: "令和道子", class: 'form-control col-sm-3' %>
       </div>
       <div>
-        <%= f.submit "変更内容を保存", class: "btn btn-success btn-sm" %>
+        <%= f.submit "変更内容を保存", class: "btn btn-success btn-sm mt-4" %>
       </div>
       <% end %>
     </div>
