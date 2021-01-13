@@ -3,15 +3,13 @@ class Public::CartItemsController < ApplicationController
 
   def create
     @cart_item = current_member.cart_items.build(cart_item_params)
-    @cart_items = current_member.cart_items.all
-    @cart_items.each do |cart_item|
-      if cart_item.item_id == @cart_item.item_id
-        new_quantity = cart_item.quantity + @cart_item.quantity
-        cart_item.update_attribute(:quantity, new_quantity)
-        @cart_item.delete
-      end
-      end
+    cart_item = current_member.cart_items.find_by(item_id: @cart_item.item_id)
+    if cart_item.present?
+      new_quantity = cart_item.quantity + @cart_item.quantity
+      cart_item.update_attribute(:quantity, new_quantity)
+    else
       @cart_item.save
+    end
       redirect_to :cart_items
   end
 
