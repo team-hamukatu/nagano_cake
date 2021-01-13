@@ -1,7 +1,6 @@
 class CartItem < ApplicationRecord
   belongs_to :item
   belongs_to :member
-  
    def addTax(money,rate)
     taxed_money =  (money*rate).round
     return taxed_money

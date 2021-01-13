@@ -1,6 +1,12 @@
 class Admin::OrdersController < ApplicationController
   def index
+    if params[:member_id].blank?
+      
     @orders = Order.all.page(params[:page]).per(10)
+    else
+    @member = params[:member_id]
+    @orders = Order.where(member_id: @member).page(params[:page]).per(10)
+    end
   end
 
   def show
