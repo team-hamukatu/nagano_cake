@@ -1,4 +1,6 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_member!
+
   def new
     @order = Order.new
     @order.member_id = current_member.id

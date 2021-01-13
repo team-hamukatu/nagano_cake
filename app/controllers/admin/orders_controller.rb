@@ -1,11 +1,13 @@
 class Admin::OrdersController < ApplicationController
+  before_action :authenticate_administrator!
+  
   def index
     @orders = Order.all.page(params[:page]).per(10)
   end
 
   def show
     @order = Order.find(params[:id])
-    @order_item = OrderedItem.find(params[:id])
+    #@order_item = OrderedItem.find(params[:id])
 
   end
 
