@@ -1,6 +1,6 @@
 <div class="container">
   <div class="text">
-
+    
   <div class="row mt-5">
   <div class="col-3">
     <h2 class="text-center" style= "background-color: #EEEEEE">注文情報確認</h2>
@@ -27,13 +27,13 @@
                 <%= cart_item.item.name %>
               </td>
               <td>
-                <%= number_to_currency(cart_item.item.price_without_tax*1.08, unit:"¥", strip_insignificant_zeros: true)  %>
+                <%= number_to_currency(cart_item.item.price_without_tax*1.08, unit:"¥", strip_insignificant_zeros: true, precision:0)  %>
               </td>
               <td>
                 <%= cart_item.quantity %>
               </td>
               <td>
-                <%= number_to_currency(cart_item.total_price.to_i, unit:"¥", strip_insignificant_zeros: true) %>
+                <%= number_to_currency(cart_item.total_price.to_i, unit:"¥", strip_insignificant_zeros: true, precision:0) %>
               </td>
             </tr>
             <% end %>
@@ -53,12 +53,12 @@
         </thead>
         <tbody>
             <tr>
-              <td><span><%= number_to_currency(@order.postage, unit:"¥", strip_insignificant_zeros: true) %></span></tb>
+              <td><span><%= number_to_currency(@order.postage, unit:"¥", strip_insignificant_zeros: true, precision:0) %></span></tb>
               <td>
-                <span><%= number_to_currency(@amount_without_postage, unit:"¥", strip_insignificant_zeros: true) %></span>
+                <span><%= number_to_currency(@amount_without_postage, unit:"¥", strip_insignificant_zeros: true, precision:0) %></span>
               </td>
               <td>
-                <span><%= number_to_currency(@billing_amount, unit:"¥", strip_insignificant_zeros: true) %></span>
+                <span><%= number_to_currency(@billing_amount, unit:"¥", strip_insignificant_zeros: true, precision:0) %></span>
               </td>
             </tr>
         </tbody>

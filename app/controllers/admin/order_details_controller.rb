@@ -5,8 +5,8 @@ class Admin::OrderDetailsController < ApplicationController
     
     ordered_item = OrderedItem.find(params[:id])
     ordered_item.update(ordered_item_params)
-    redirect_back(fallback_location: admin_orders_path)
-    #redirect_to  admin_order_path(ordered_item.order_id)
+    #redirect_back(fallback_location: admin_orders_path)
+    redirect_to  admin_order_path(ordered_item.order_id)
   end
   
   private
