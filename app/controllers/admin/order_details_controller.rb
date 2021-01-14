@@ -6,16 +6,22 @@ class Admin::OrderDetailsController < ApplicationController
     ordered_item = OrderedItem.find(params[:id])
     ordered_item.update(ordered_item_params)
 
+#親のordered_itemからアソシエーションの関係を使ってorderのidを引っ張ってくる
+#変数orderには変数order_itemの親のデータを代入する
 
-    #製作ステータス
-    order_status = ordered_item.order.order_status
-    order = Order.find_by(params[:id])
-    if ordered_item.production_status == "制作中"
-      order.update_attributes(order_status: 2)
+    order = ordered_item.order
+    ordered_items = OrderedItem.where(order_id: order.id)
+
+    if ordered_item.production_status == "製作中"
+      order.update_attribute(:order_status, "製作中")
+
+
+    elsif
+      ordered_items.each.all? {|ordered_item| ordered_item.production_status == "製作完了" }
+      order.update_attribute(:order_status, "発送準備中")
     end
 
     redirect_back(fallback_location: admin_orders_path)
-    #redirect_to  admin_order_path(ordered_item.order_id)
   end
 
   private

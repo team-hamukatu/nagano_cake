@@ -63,7 +63,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    patch "/order_details/:id" => "order_details#update", as ""
+    patch "/order_details/:id" => "order_details#update", as: "order_details"
   end
 
 end
