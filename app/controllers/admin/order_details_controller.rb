@@ -22,6 +22,7 @@ class Admin::OrderDetailsController < ApplicationController
     end
 
     redirect_back(fallback_location: admin_orders_path)
+
   end
 
   private
