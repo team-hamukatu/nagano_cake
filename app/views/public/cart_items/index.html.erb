@@ -4,7 +4,7 @@
     <div class="col-md-8 mx-auto">
       <div class="row mt-5">
         <div class="col-6">
-          <h2 class="text-center" style= "background-color: #EEEEEE">ショッピングカート</h2>
+          <h2 class="text-center" style= "background-color: #C2EEFF">ショッピングカート</h2>
         </div>
       </div>
 
@@ -13,7 +13,7 @@
       </div>
       <br>
       <table class="table table-bordered">
-        <thead class="thead-light">
+        <thead bgcolor=#C2EEFF>
           <tr>
             <th>商品名</th>
             <th>単価（税込み）</th>
@@ -54,7 +54,7 @@
          <%= link_to "買い物を続ける", root_path, class: "col-2" "btn btn-primary btn-sm" %>
          <div class="offset-7">
            <table class="table table-bordered">
-             <tr>
+             <tr >
                <th class="table-active">合計金額</th><td><%= @sum.to_s(:delimited) %></td>
              </tr>
            </table>
